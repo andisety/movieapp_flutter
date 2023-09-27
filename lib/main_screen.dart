@@ -11,7 +11,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Movie App Size: ${MediaQuery.of(context).size.width}"),
+          title: const Text("Movie App "),
         ),
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraint) {
@@ -41,7 +41,7 @@ class DekstopGrid extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Detail(movie: movies[index]);
+                    return DetailPage(movie: movies[index]);
                   }));
                 },
                 child: Image.network(
@@ -68,7 +68,7 @@ class MobileGrid extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Detail(movie: movies[index]);
+                    return DetailPage(movie: movies[index]);
                   }));
                 },
                 child: Image.network(
