@@ -209,121 +209,126 @@ class _DetailWebPageState extends State<DetailWebPage> {
 
     return Scaffold(
       appBar: kIsWeb ? null : AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 16,
-          horizontal: 64,
-        ),
-        child: Center(
-          child: SizedBox(
-            width: screenWidth <= 1200 ? 800 : 1200,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: [
-                    buttonArrow(context),
-                    Text(
-                      widget.movie.originalTitle.toString(),
-                      style: const TextStyle(
-                        fontSize: 32,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 64,
+          ),
+          child: Center(
+            child: SizedBox(
+              width: screenWidth <= 1200 ? 800 : 1200,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      buttonArrow(context),
+                      Text(
+                        widget.movie.originalTitle.toString(),
+                        style: const TextStyle(
+                          fontSize: 32,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Expanded(
-                              child: Image.network(
-                                "http://image.tmdb.org/t/p/w500/${widget.movie.posterPath}",
-                                height: 500,
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Expanded(
+                                child: Image.network(
+                                  "http://image.tmdb.org/t/p/w500/${widget.movie.posterPath}",
+                                  height: 500,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 32),
-                    Expanded(
-                      child: Card(
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Text(
-                                widget.movie.title.toString(),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 30.0,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Release Date :"),
-                                      const SizedBox(width: 8.0),
-                                      Text(
-                                        widget.movie.releaseDate.toString(),
-                                      ),
-                                    ],
-                                  ),
-                                  const FavoriteButton(),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Text("Rating :"),
-                                  const SizedBox(width: 8.0),
-                                  RatingBar.builder(
-                                    initialRating:
-                                        (widget.movie.voteAverage! / 2)
-                                            .toDouble(),
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemPadding: const EdgeInsets.symmetric(
-                                        horizontal: 4.0),
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16.0),
-                                child: Text(
-                                  widget.movie.overview.toString(),
-                                  textAlign: TextAlign.justify,
+                      const SizedBox(width: 32),
+                      Expanded(
+                        child: Card(
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Text(
+                                  widget.movie.title.toString(),
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    fontSize: 16.0,
+                                    fontSize: 30.0,
                                   ),
                                 ),
-                              ),
-                            ],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Release Date :"),
+                                        const SizedBox(width: 8.0),
+                                        Text(
+                                          widget.movie.releaseDate.toString(),
+                                        ),
+                                      ],
+                                    ),
+                                    const FavoriteButton(),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text("Rating :"),
+                                    const SizedBox(width: 4.0),
+                                    Expanded(
+                                      child: RatingBar.builder(
+                                        initialRating:
+                                            (widget.movie.voteAverage! / 2)
+                                                .toDouble(),
+                                        minRating: 1,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 5,
+                                        itemSize: 15,
+                                        itemPadding: const EdgeInsets.symmetric(
+                                            horizontal: 3.0),
+                                        itemBuilder: (context, _) => const Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        ),
+                                        onRatingUpdate: (rating) {
+                                          print(rating);
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0),
+                                  child: Text(
+                                    widget.movie.overview.toString(),
+                                    textAlign: TextAlign.justify,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
